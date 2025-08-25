@@ -4,6 +4,8 @@
 # BUILD UTILITY PROGRAMS.  Invoke this script with no arguments.
 #---------------------------------------------------------------------------------
 
+DIR_ROOT=$PWD
+
 mac=$(hostname -f)
 
 if [ ! -d ./exec ] ;then
@@ -13,36 +15,14 @@ fi
 rm -fr ./build
 mkdir ./build && cd ./build
 
-case $mac in
-
 #---------------------------------------------------------------------------------
-# BUILD ON WCOSS DELL.
+# BUILD ON WCOSS2
 #---------------------------------------------------------------------------------
 
-v????.ncep.noaa.gov | m????.ncep.noaa.gov)
-
-  module purge
-  module use ../modulefiles
-  module load build.wcoss_dell_p3.intel
-  module list ;;
-
-#---------------------------------------------------------------------------------
-# BUILD ON Hera
-#---------------------------------------------------------------------------------
-
-h????)
-
-  module purge
-  module use ../modulefiles
-  module load build.hera.intel
-  module list ;;
-
-*)
-
-  echo "MACHINE OPTION NOT FOUND. EXIT."
-  exit  ;;
-
-esac
+module reset
+module use $DIR_ROOT/modulefiles
+module load build.wcoss2.intel
+module list
 
 cmake .. -DCMAKE_INSTALL_PREFIX=../
 

@@ -29,6 +29,7 @@ endif()
 
 find_package(bacio REQUIRED)
 find_package(g2 REQUIRED)
+find_package(w3emc REQUIRED)
 
 set(exec_dir exec)
 
